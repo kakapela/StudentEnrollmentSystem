@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ManagerController {
 
-    private final EnrollmentService enrollmentService;
+    private EnrollmentService enrollmentService;
 
     @Autowired
     public ManagerController(EnrollmentService enrollmentService) {

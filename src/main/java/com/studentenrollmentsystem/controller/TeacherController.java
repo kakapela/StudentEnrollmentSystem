@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @RestController
 public class TeacherController {
 
-    private final EnrollmentService enrollmentService;
+    private EnrollmentService enrollmentService;
 
     @Autowired
     public TeacherController(EnrollmentService enrollmentService) {

@@ -19,9 +19,9 @@ import java.security.Principal;
 @RestController
 public class UserController {
 
-    private final UserService userService;
-    private final CourseService courseService;
-    private final EnrollmentService enrollmentService;
+    private UserService userService;
+    private CourseService courseService;
+    private EnrollmentService enrollmentService;
 
     @Autowired
     public UserController(UserService userService, CourseService courseService, EnrollmentService enrollmentService) {
@@ -32,7 +32,7 @@ public class UserController {
 
     @PostMapping("/api/user/registration")
     public ResponseEntity<?> register(@RequestBody User user) {
-        if(userService.findByUsername(user.getUsername()) != null)
+        if (userService.findByUsername(user.getUsername()) != null)
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         user.setRole(Role.STUDENT);
         return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
@@ -40,7 +40,7 @@ public class UserController {
 
     @GetMapping("/api/user/login")
     public ResponseEntity<?> getUser(Principal principal) {
-        if(principal == null) {
+        if (principal == null) {
             //for logout
             return ResponseEntity.ok(principal);
         }
@@ -53,7 +53,7 @@ public class UserController {
     }
 
     @GetMapping("/api/user/courses")
-    public ResponseEntity<?> getCourses(){
+    public ResponseEntity<?> getCourses() {
         return ResponseEntity.ok(courseService.findAllCourses());
     }
 

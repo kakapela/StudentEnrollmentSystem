@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class EnrollmentServiceImpl implements EnrollmentService {
 
-    private final EnrollmentRepository enrollmentRepository;
+    private EnrollmentRepository enrollmentRepository;
 
     @Autowired
     public EnrollmentServiceImpl(EnrollmentRepository enrollmentRepository) {
