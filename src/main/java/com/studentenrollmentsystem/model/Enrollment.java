@@ -24,6 +24,6 @@ public class Enrollment {
     private User student;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "cours_id", referencedColumnName = "id")
+    @JoinColumn(name = "course_id", referencedColumnName = "id")
     private Course course;
 }
