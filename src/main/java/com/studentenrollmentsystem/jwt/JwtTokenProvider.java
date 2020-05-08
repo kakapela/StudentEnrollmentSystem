@@ -35,7 +35,7 @@ public class JwtTokenProvider {
         String authorities = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining());
         return Jwts.builder()
                 .setSubject(authentication.getName())
-                .claim("role",authorities)
+                .claim("roles",authorities)
                 .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationInMs))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();

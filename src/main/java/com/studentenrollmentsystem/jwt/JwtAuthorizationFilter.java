@@ -1,6 +1,5 @@
 package com.studentenrollmentsystem.jwt;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,7 +24,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         Authentication authentication = jwtTokenProvider.getAuthentication(request);
-
         if(authentication != null  && jwtTokenProvider.validateToken(request)) {
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }

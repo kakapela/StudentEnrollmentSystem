@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -65,9 +66,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin().loginPage("/api/user/login")
                 .and().
                 httpBasic()
-                .and()
-                .csrf().disable();
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().csrf().disable();
 
+        //jwt filter - once per request
+       // http.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
+
+        //mozemy dodac albo basic authentication filter albo once per request filter - przefiltruja jwt tak samo
         http.addFilter(new JwtAuthorizationFilter(authenticationManager(), jwtTokenProvider));
     }
 
