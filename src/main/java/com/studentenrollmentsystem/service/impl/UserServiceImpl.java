@@ -5,7 +5,6 @@ import com.studentenrollmentsystem.repository.UserRepository;
 import com.studentenrollmentsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,7 @@ public class UserServiceImpl implements UserService {
     private  UserRepository userRepository;
 
     @Bean
-    PasswordEncoder getEncoder() {
+    PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -31,7 +30,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User saveUser(User user) {
-        user.setPassword(getEncoder().encode(user.getPassword()));
+        user.setPassword(getPasswordEncoder().encode(user.getPassword()));
         return userRepository.save(user);
     }
 
